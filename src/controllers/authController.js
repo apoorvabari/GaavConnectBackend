@@ -78,6 +78,19 @@ const forgetPassword = async (req, res, next) => {
         next(error);
     }
 };
+/* ═══════════════════════════════════════════
+   LOGOUT  –  POST /api/auth/logout
+═══════════════════════════════════════════ */
 
-module.exports = { register, login, forgetPassword };
+const logout = async (req, res, next) => {
+    try {
+        return ApiResponse.success(res, {
+            statusCode: 200,
+            message: 'successfully logout'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
 
+module.exports = { register, login, forgetPassword, logout };

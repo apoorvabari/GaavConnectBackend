@@ -15,5 +15,8 @@ router.post('/login', loginValidator, authController.login);
 // POST /api/auth/forget-password
 router.post('/forget-password', forgetPasswordValidator, authController.forgetPassword);
 
+// POST /api/auth/logout
+router.post('/logout', authController.logout);
+
 module.exports = router;
 
