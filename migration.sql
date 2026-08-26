@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
     state       VARCHAR(100)    NOT NULL,
     profession  VARCHAR(150)    NOT NULL,
     password    VARCHAR(255)    NOT NULL,
-    user_type   ENUM('gavkari', 'sarpanch')              NOT NULL DEFAULT 'gavkari',
+    user_type   ENUM('gavkari', 'sarpanch')NOT NULL DEFAULT 'gavkari',
     status      ENUM('active', 'inactive', 'suspended') NOT NULL DEFAULT 'active',
     created_at  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
