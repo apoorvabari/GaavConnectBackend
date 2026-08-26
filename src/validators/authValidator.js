@@ -62,8 +62,8 @@ const registerValidator = [
     body('userType')
         .trim()
         .notEmpty().withMessage('User type is required')
-        .isIn(['normal', 'sarpanch'])
-        .withMessage("User type must be 'normal' or 'sarpanch'"),
+        .isIn(['gavkari', 'sarpanch'])
+        .withMessage("User type must be 'gavkari' or 'sarpanch'"),
 
     body('password')
         .notEmpty().withMessage('Password is required')
@@ -116,7 +116,7 @@ const forgetPasswordValidator = [
         .notEmpty().withMessage('Password is required')
         .isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
 
-    body('confirmPassword')
+    body('confirmpassword')
         .notEmpty().withMessage('Confirm password is required')
         .custom((value, { req }) => {
             if (value !== req.body.password) throw new Error('Passwords do not match');

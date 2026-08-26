@@ -7,7 +7,7 @@ const User   = require('../models/User');
 const generateToken = (user) =>
     jwt.sign(
         { id: user.id, userType: user.user_type },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET || 'super_secret_fallback_key',
         { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
 

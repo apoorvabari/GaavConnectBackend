@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require('../config/db').promise();
 
 const User = {
 
@@ -21,7 +21,7 @@ const User = {
             userData.state,
             userData.profession,
             userData.password,
-            userData.userType   // 'normal' | 'sarpanch'
+            userData.userType
         ];
 
         const [result] = await pool.query(sql, values);
