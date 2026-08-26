@@ -27,20 +27,6 @@ const initDB = async () => {
 
     await pool.query(sql);
 
-    // Auto-migrate the ENUM on the live database in 3 safe steps
-    try {
-        // Step 1: Add 'gavkari' to the ENUM so we can safely update existing rows
-        await pool.query("ALTER TABLE users MODIFY COLUMN user_type ENUM('normal', 'sarpanch', 'gavkari') NOT NULL DEFAULT 'normal'");
-        
-        // Step 2: Update existing rows
-        await pool.query("UPDATE users SET user_type = 'gavkari' WHERE user_type = 'normal'");
-        
-        // Step 3: Remove 'normal' from the ENUM completely
-        await pool.query("ALTER TABLE users MODIFY COLUMN user_type ENUM('gavkari', 'sarpanch') NOT NULL DEFAULT 'gavkari'");
-    } catch (err) {
-        console.error('Migration notice: Could not alter user_type.', err.message);
-    }
-
     console.log('✅ Table "users" is ready');
 };
 
