@@ -83,14 +83,13 @@ const registerValidator = [
 
 const loginValidator = [
 
-    body('emailOrMobile')
-        .trim()
-        .notEmpty().withMessage('Email or mobile number is required')
-        .custom((v) => {
-            if (!isEmail(v) && !isMobile(v))
-                throw new Error('Provide a valid email address or 10-digit mobile number');
-            return true;
-        }),
+    body().custom((value, { req }) => {
+        const identifier = req.body.email || req.body.mobile || req.body.emailOrMobile;
+        if (!identifier) {
+            throw new Error('Email or mobile number is required');
+        }
+        return true;
+    }),
 
     body('password')
         .notEmpty().withMessage('Password is required')
@@ -103,20 +102,22 @@ const loginValidator = [
 
 const forgetPasswordValidator = [
 
-    body('emailOrMobile')
-        .trim()
-        .notEmpty().withMessage('Email or mobile number is required')
-        .custom((v) => {
-            if (!isEmail(v) && !isMobile(v))
-                throw new Error('Provide a valid email address or 10-digit mobile number');
-            return true;
-        }),
+    body().custom((value, { req }) => {
+        const identifier = req.body.email || req.body.mobile || req.body.emailOrMobile;
+        if (!identifier) {
+            throw new Error('Email or mobile number is required');
+        }
+        if (req.body.mobile && !/^\d{10}$/.test(req.body.mobile)) {
+            throw new Error('Invalid mobile number. It must be exactly 10 digits.');
+        }
+        return true;
+    }),
 
     body('password')
         .notEmpty().withMessage('Password is required')
-        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+        .isLength({ max: 10 }).withMessage('Password must not exceed 10 characters'),
 
-    body('confirmpassword')
+    body('confirmPassword')
         .notEmpty().withMessage('Confirm password is required')
         .custom((value, { req }) => {
             if (value !== req.body.password) throw new Error('Passwords do not match');

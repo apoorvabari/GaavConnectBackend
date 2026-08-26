@@ -1,4 +1,4 @@
-const pool = require('../config/db').promise();
+const pool = require('../config/db');
 
 const User = {
 

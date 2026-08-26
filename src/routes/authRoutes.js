@@ -1,10 +1,10 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
-const authController                  = require('../controllers/authController');
+const authController = require('../controllers/authController');
 const { registerValidator,
-        loginValidator,
-        forgetPasswordValidator }              = require('../validators/authValidator');
+    loginValidator,
+    forgetPasswordValidator } = require('../validators/authValidator');
 
 // POST /api/auth/register
 router.post('/register', registerValidator, authController.register);

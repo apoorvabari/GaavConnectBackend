@@ -1,4 +1,4 @@
-const pool = require('./database');
+const pool = require('./db');
 
 const initDB = async () => {
     const sql = `
@@ -12,7 +12,7 @@ const initDB = async () => {
             state       VARCHAR(100)    NOT NULL,
             profession  VARCHAR(150)    NOT NULL,
             password    VARCHAR(255)    NOT NULL,
-            user_type   ENUM('normal', 'sarpanch')              NOT NULL DEFAULT 'normal',
+            user_type   ENUM('gavkari', 'sarpanch')              NOT NULL DEFAULT 'gavkari',
             status      ENUM('active', 'inactive', 'suspended') NOT NULL DEFAULT 'active',
             created_at  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

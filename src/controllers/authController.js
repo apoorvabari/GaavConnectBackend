@@ -32,9 +32,10 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
     try {
-        const { emailOrMobile, password } = req.body;
+        const { email, mobile, emailOrMobile, password } = req.body;
+        const identifier = email || mobile || emailOrMobile;
 
-        const { user, token } = await authService.login(emailOrMobile, password);
+        const { user, token } = await authService.login(identifier, password);
 
         return ApiResponse.success(res, {
             statusCode: 200,
@@ -59,9 +60,10 @@ const login = async (req, res, next) => {
 
 const forgetPassword = async (req, res, next) => {
     try {
-        const { emailOrMobile, password } = req.body;
+        const { email, mobile, emailOrMobile, password } = req.body;
+        const identifier = email || mobile || emailOrMobile;
 
-        const result = await authService.forgetPassword(emailOrMobile, password);
+        const result = await authService.forgetPassword(identifier, password);
 
         return ApiResponse.success(res, {
             statusCode: 200,
